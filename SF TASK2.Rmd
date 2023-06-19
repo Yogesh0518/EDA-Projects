@@ -1,0 +1,67 @@
+---
+title: "TASK2: PREDICTION USING UNSUPERVISED LEARNING"
+author: "Yogesh S"
+date: "2023-06-12"
+output: html_document
+---
+
+<br>
+
+##### **OBJECTIVE:** From given 'IRIS' Dataset predict the optimum no .of clusters.
+
+<br>
+
+#### **Step 1: Load the required Datasets.**
+```{r}
+data<-iris
+head(iris)
+```
+
+<br>
+
+#### **Step 2: Load the required libraries.**
+```{r}
+library(ggplot2)
+library(cluster)
+library(factoextra)
+```
+
+<br>
+
+#### **Step 3: View the datasets.**
+```{r}
+View(iris)
+str(iris)
+```
+
+<br>
+
+
+#### **Step 4: Let us find the optimum number of clusters using the "ELBOW METHOD"**
+```{r}
+clust<-fviz_nbclust(iris [,1:4], kmeans, method = "wss")
+clust
+```
+
+<br>
+
+##### From the previous graph, we can see the bend located at "k=3". Therefore optimum no.of clusters = 3.
+
+<br>
+
+#### **Step 5: Let us use a clustering technique such as "K-MEANS CLUSTERING" to classify the data according to defined number of clusters"**
+
+```{r}
+set.seed(100)
+Clustech<-kmeans(data[,1:4],center=3,nstart=20)
+Clustech
+```
+
+<br>
+
+#### **Step 6: Let us visualize the clustering using ggplot**
+```{r}
+ggplot(data,aes(Petal.Length,Petal.Width))+ geom_point(aes(col=Species),size=4)
+```
+
+<br>
